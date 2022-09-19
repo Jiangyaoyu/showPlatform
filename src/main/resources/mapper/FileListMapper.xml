@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nxu.mapper.FileListMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.nxu.pojo.FileList" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="catagoryid" property="catagoryid" jdbcType="INTEGER" />
+    <result column="fileName" property="filename" jdbcType="VARCHAR" />
+    <result column="fileUrl" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="reserve2" property="reserve2" jdbcType="VARCHAR" />
+    <result column="reserve1" property="reserve1" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, catagoryid, fileName, fileUrl, reserve2, reserve1
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from filelist
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from filelist
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.nxu.pojo.FileList" >
+    insert into filelist (id, catagoryid, fileName, 
+      fileUrl, reserve2, reserve1
+      )
+    values (#{id,jdbcType=INTEGER}, #{catagoryid,jdbcType=INTEGER}, #{filename,jdbcType=VARCHAR}, 
+      #{fileUrl,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, #{reserve1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.nxu.pojo.FileList" >
+    insert into filelist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="catagoryid != null" >
+        catagoryid,
+      </if>
+      <if test="filename != null" >
+        fileName,
+      </if>
+      <if test="fileUrl != null" >
+        fileUrl,
+      </if>
+      <if test="reserve2 != null" >
+        reserve2,
+      </if>
+      <if test="reserve1 != null" >
+        reserve1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="catagoryid != null" >
+        #{catagoryid,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null" >
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null" >
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nxu.pojo.FileList" >
+    update filelist
+    <set >
+      <if test="catagoryid != null" >
+        catagoryid = #{catagoryid,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null" >
+        fileName = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null" >
+        fileUrl = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null" >
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null" >
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nxu.pojo.FileList" >
+    update filelist
+    set catagoryid = #{catagoryid,jdbcType=INTEGER},
+      fileName = #{filename,jdbcType=VARCHAR},
+      fileUrl = #{fileUrl,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR},
+      reserve1 = #{reserve1,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
